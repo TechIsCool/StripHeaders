@@ -59,7 +59,7 @@
     <DirectoryRef Id="INETSRVDIR32">
       <!-- Add the stripheaders.dll module -->
       <Component Id="stripheaders32.dll" Guid="0332F0DE-0BD5-4032-BF53-02ED3595AACA">
-        <File Source="..\Release\stripheaders.dll" KeyPath="yes" Checksum="yes" Id="dll32" />
+        <File Source="..\Release\stripheaders.dll" KeyPath="yes" Checksum="yes" Win64="no" Id="dll32" />
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INETSRVDIR">
