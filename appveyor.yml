@@ -1,8 +1,7 @@
 version: 1.0.{build}
 image: Visual Studio 2015
 configuration: Release
-platform: Mixed Platforms
+platform: Both
 build:
   project: StripHeaders.sln
-  parallel: true
   verbosity: normal
