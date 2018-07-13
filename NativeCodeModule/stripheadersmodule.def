@@ -1,4 +1,4 @@
-LIBRARY StripHeadersModules
+LIBRARY stripheaders
 
 EXPORTS
 	RegisterModule
