@@ -5,3 +5,5 @@ platform: Both
 build:
   project: StripHeaders.sln
   verbosity: normal
+artifacts:
+- path: Installer\bin\**\Release\*.msi
