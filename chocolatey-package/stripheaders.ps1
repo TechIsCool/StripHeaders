@@ -1,5 +1,5 @@
 ﻿$Package = 'stripheaders'
-$Version = $(Get-Item -Path ENV:PRODUCTVERSION)
+$Version = $(Get-Item -Path ENV:PRODUCTVERSION).Value
 $FileName = "iis_stripheaders_module_${Version}.msi"
 
 $Params = @{
