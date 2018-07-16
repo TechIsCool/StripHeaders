@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>3.8</ProductVersion>
+    <ProductVersion>$(ProductVersion)</ProductVersion>
     <ProjectGuid>{8a36cbc1-ddf7-4419-ad3f-f741f7df5a2f}</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
     <OutputName>iis_stripheaders_module_$(ProductVersion)</OutputName>
