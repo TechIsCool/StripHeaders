@@ -3,7 +3,7 @@ param(
     [parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     [System.IO.FileInfo]$Path,
- 
+
     [parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     [ValidateSet("ProductCode", "ProductVersion", "ProductName", "Manufacturer", "ProductLanguage", "FullVersion")]
@@ -19,16 +19,16 @@ Process {
         $View.GetType().InvokeMember("Execute", "InvokeMethod", $null, $View, $null)
         $Record = $View.GetType().InvokeMember("Fetch", "InvokeMethod", $null, $View, $null)
         $Value = $Record.GetType().InvokeMember("StringData", "GetProperty", $null, $Record, 1)
- 
+
         # Commit database and close view
         $MSIDatabase.GetType().InvokeMember("Commit", "InvokeMethod", $null, $MSIDatabase, $null)
-        $View.GetType().InvokeMember("Close", "InvokeMethod", $null, $View, $null)           
+        $View.GetType().InvokeMember("Close", "InvokeMethod", $null, $View, $null)
         $MSIDatabase = $null
         $View = $null
- 
+
         # Return the value
         return $Value
-    } 
+    }
     catch {
         Write-Warning -Message $_.Exception.Message ; break
     }
