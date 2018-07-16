@@ -4,7 +4,7 @@ $FileName = "iis_stripheaders_module_${Version}.msi"
 
 $Params = @{
   Algorithm = 'SHA256';
-  LocalFile = "Installer\bin\x64\Release\${FileName}";
+  LocalFile = "..\Installer\bin\x64\Release\${FileName}";
   Hash = '';
   ProductCode = '';
 }
