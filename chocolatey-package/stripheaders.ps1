@@ -1,6 +1,6 @@
 ﻿$Package = 'stripheaders'
-$Version = Get-Item -Path ENV:PRODUCTVERSION
-$FileName = "iis_stripheaders_module_$(Version).msi"
+$Version = $(Get-Item -Path ENV:PRODUCTVERSION)
+$FileName = "iis_stripheaders_module_${Version}.msi"
 
 $Params = @{
   Algorithm = 'SHA256';
