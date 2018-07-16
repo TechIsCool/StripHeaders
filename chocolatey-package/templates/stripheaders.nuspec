@@ -4,7 +4,7 @@
     <id>stripheaders</id>
     <version>##VERSION##</version>
     <title>Strip Headers</title>
-    <authors>NewRelic</authors>
+    <authors>Dionach</authors>
     <owners>Dionach, TechIsCool</owners>
     <licenseUrl>https://raw.githubusercontent.com/TechIsCool/StripHeaders/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/TechIsCool/StripHeaders</projectUrl>
@@ -14,7 +14,6 @@
     information leakage of software and version information, which can be useful to an attacker.
     </description>
     <summary>Strip Headers</summary>
-    <releaseNotes>##RELEASENOTES##</releaseNotes>
     <copyright>Dionach Ltd</copyright>
     <tags>iis stripheaders strip-headers dotnet .Net</tags>
   </metadata>
