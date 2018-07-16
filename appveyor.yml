@@ -1,0 +1,9 @@
+version: 1.0.{build}
+image: Visual Studio 2015
+configuration: Release
+platform: Both
+build:
+  project: StripHeaders.sln
+  verbosity: normal
+artifacts:
+- path: Installer\bin\**\Release\*.msi
