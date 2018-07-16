@@ -24,7 +24,8 @@ $Params['Hash'] = Get-FileHash `
     -Algorithm $Params['Algorithm']
   Write-Output "Created $OS $($Params['Algorithm']): $($Params['Hash'].Hash)"
 
-$Params['ProductCode'] = Write-Output $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode)
+$Params['ProductCode'] = '{}'
+# $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode)
 Write-Output "Found $OS ProductCode: $($Params['ProductCode'])"
 
 Copy-Item -Path $Params['LocalFile'] -Destination "$PSScriptRoot\output\binaries\${FileName}"
