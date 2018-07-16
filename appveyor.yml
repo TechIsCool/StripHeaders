@@ -1,9 +1,17 @@
 version: 1.0.{build}
 image: Visual Studio 2017
 configuration: Release
+before_build:
+- ps: Set-Item -Path ENV:PRODUCTVERSION -Value $(Get-Content .\VERSION -Raw)
 platform: Both
 build:
   project: StripHeaders.sln
   verbosity: normal
+after_build:
+  - ps: >-
+      cd chocolatey-package;
+      ./stripheaders.ps1;
+      choco pack output/stripheaders.nuspec
 artifacts:
 - path: Installer\bin\**\Release\*.msi
+- path: chocolatey-package/output/stripheaders.nupkg

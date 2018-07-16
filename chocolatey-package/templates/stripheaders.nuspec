@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>stripheaders</id>
+    <version>##VERSION##</version>
+    <title>Strip Headers</title>
+    <authors>NewRelic</authors>
+    <owners>Dionach, TechIsCool</owners>
+    <licenseUrl>https://raw.githubusercontent.com/TechIsCool/StripHeaders/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/TechIsCool/StripHeaders</projectUrl>
+    <packageSourceUrl>https://github.com/TechIsCool/StripHeaders</packageSourceUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A Native-Code module for IIS 7.0 and above, designed to easily remove unnecessary response headers and prevent
+    information leakage of software and version information, which can be useful to an attacker.
+    </description>
+    <summary>Strip Headers</summary>
+    <releaseNotes>##RELEASENOTES##</releaseNotes>
+    <copyright>Dionach Ltd</copyright>
+    <tags>iis stripheaders strip-headers dotnet .Net</tags>
+  </metadata>
+</package>
