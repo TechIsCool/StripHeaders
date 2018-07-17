@@ -15,3 +15,14 @@ after_build:
 artifacts:
 - path: Installer\bin\**\Release\*.msi
 - path: chocolatey-package\*.nupkg
+- path: chocolatey-package\CHECKSUM.txt
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: k8FhXZAeG1KcCv5llCgSN3aO7SFH/u3B+xMggvzMIBlPL0rjvCNK4n62SZw+F/1i
+  artifact: Installer\bin\**\Release\*.msi, chocolatey-package\*.nupkg, chocolatey-package\CHECKSUM.txt
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: true

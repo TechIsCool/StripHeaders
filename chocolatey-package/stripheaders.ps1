@@ -23,7 +23,8 @@ New-Item `
 $Params['Hash'] = Get-FileHash `
     -Path $Params['LocalFile'] `
     -Algorithm $Params['Algorithm']
-  Write-Output "Created $OS $($Params['Algorithm']): $($Params['Hash'].Hash)"
+  Write-Output "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)"
+  "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)" | Out-File -FilePath 'CHECKSUM.txt' 
 
 Copy-Item -Path $Params['LocalFile'] -Destination "$PSScriptRoot\output\binaries\${FileName}"
 
