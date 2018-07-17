@@ -14,13 +14,16 @@ after_build:
       choco pack output/stripheaders.nuspec
 artifacts:
 - path: Installer\bin\**\Release\*.msi
+  name: msi
 - path: chocolatey-package\*.nupkg
+  name: nupkg
 - path: chocolatey-package\CHECKSUM.txt
+  name: checksum
 deploy:
   provider: GitHub
   auth_token:
     secure: k8FhXZAeG1KcCv5llCgSN3aO7SFH/u3B+xMggvzMIBlPL0rjvCNK4n62SZw+F/1i
-  artifact: Installer\bin\**\Release\*.msi, chocolatey-package\*.nupkg, chocolatey-package\CHECKSUM.txt
+  artifact: msi,nupkg,checksum
   draft: false
   prerelease: false
   on:
