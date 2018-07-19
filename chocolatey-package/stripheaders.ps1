@@ -12,8 +12,7 @@ $Params = @{
 
 Write-Output `
   $Package `
-  "Release Version: $Version" `
-  "ProductCode: $($Params['ProductCode'])"
+  "Release Version: $Version"
 
 New-Item `
 -ItemType Directory `

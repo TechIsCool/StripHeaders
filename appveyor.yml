@@ -25,9 +25,9 @@ artifacts:
 - path: chocolatey-package\CHECKSUM.txt
   name: checksum
 test_script:
-  - ps: cinst stripheaders  --version $env:PRODUCTVERSION -fdvy -source "$pwd\chocolatey-package;http://chocolatey.org/api/v2/"
+  - ps: cinst stripheaders  --version $env:PRODUCTVERSION -fdvy -source "$pwd;http://chocolatey.org/api/v2/"
   - ps: cuninst -fdvy stripheaders
-  - ps: cinst stripheaders --version $env:PRODUCTVERSION -fdvy --x86 -source "$pwd\chocolatey-package;http://chocolatey.org/api/v2/"
+  - ps: cinst stripheaders --version $env:PRODUCTVERSION -fdvy --x86 -source "$pwd;http://chocolatey.org/api/v2/"
   - ps: cuninst -fdvy stripheaders 
 deploy:
   provider: GitHub
