@@ -4,7 +4,7 @@ configuration: Release
 before_build:
 - ps: >-
   $Version = $(Get-Content .\VERSION -Raw);
-  Set-Item -Path ENV:PRODUCTVERSION -Value $Version;
+  Set-Item -Path "ENV:PRODUCTVERSION" -Value $Version;
   "#define BINVERSION $($Version.Replace(".",","))`n#define STRVERSION `"$Version`"" | `
     Out-File `
       -FilePath NativeCodeModule/version.h;
