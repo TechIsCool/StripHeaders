@@ -9,7 +9,6 @@ $Params = @{
   ProductCode = '';
 }
 
-
 Write-Output `
   $Package `
   "Release Version: $Version"
@@ -23,11 +22,11 @@ $Params['Hash'] = Get-FileHash `
     -Path $Params['LocalFile'] `
     -Algorithm $Params['Algorithm']
   Write-Output "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)"
-  "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)" | Out-File -FilePath 'CHECKSUM.txt' 
+  "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)" | Out-File -FilePath 'CHECKSUM.txt'
 
 Copy-Item -Path $Params['LocalFile'] -Destination "$PSScriptRoot\output\binaries\${FileName}"
 
-$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path "$PSScriptRoot\output\binaries\${FileName}" -Property ProductCode)
+$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path "$PSScriptRoot\output\binaries\${FileName}" -Property ProductCode).trim()
   Write-Output "Found ProductCode: $($Params['ProductCode'])"
 
 $(Get-Content -Path "$PSScriptRoot\templates\$Package.nuspec") `

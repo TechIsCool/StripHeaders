@@ -1,6 +1,9 @@
 version: 1.0.{build}
+
 image: Visual Studio 2017
+platform: Both
 configuration: Release
+
 before_build:
 - ps: |-
       $Version = $(Get-Content .\VERSION -Raw)
@@ -8,15 +11,17 @@ before_build:
       "#define BINVERSION $($Version.Replace(".",","))`n#define STRVERSION `"$Version`"" | `
         Out-File `
           -FilePath NativeCodeModule/version.h
-platform: Both
+
 build:
   project: StripHeaders.sln
   verbosity: normal
+
 after_build:
   - ps: |-
         cd chocolatey-package
         ./stripheaders.ps1
         choco pack output/stripheaders.nuspec
+
 artifacts:
 - path: Installer\bin\**\Release\*.msi
   name: msi
@@ -24,18 +29,29 @@ artifacts:
   name: nupkg
 - path: chocolatey-package\CHECKSUM.txt
   name: checksum
+
 test_script:
   - ps: cinst stripheaders  --version $env:PRODUCTVERSION -fdvy -source "$pwd;http://chocolatey.org/api/v2/"
   - ps: cuninst -fdvy stripheaders
   - ps: cinst stripheaders --version $env:PRODUCTVERSION -fdvy --x86 -source "$pwd;http://chocolatey.org/api/v2/"
   - ps: cuninst -fdvy stripheaders 
+
 deploy:
-  provider: GitHub
+- provider: GitHub
   auth_token:
     secure: k8FhXZAeG1KcCv5llCgSN3aO7SFH/u3B+xMggvzMIBlPL0rjvCNK4n62SZw+F/1i
   artifact: msi,nupkg,checksum
   draft: false
   prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: true
+
+- provider: NuGet
+  server: https://chocolatey.org/
+  api_key:
+    secure: hIJKQ1Spg7Z+jgBznNcdpXtxyTRWBAFQGAukgMK7rtPQQtNTLXJNKFbKnZH8g33A
+  artifact: nupkg
   on:
     branch: master
     appveyor_repo_tag: true
