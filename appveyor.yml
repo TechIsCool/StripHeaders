@@ -2,15 +2,21 @@ version: 1.0.{build}
 image: Visual Studio 2017
 configuration: Release
 before_build:
-- ps: Set-Item -Path ENV:PRODUCTVERSION -Value $(Get-Content .\VERSION -Raw)
+- ps: |
+  $Version = $(Get-Content .\VERSION -Raw)
+  Set-Item -Path ENV:PRODUCTVERSION -Value $Version
+  "#define BINVERSION $($Version.Replace(".",","))`n#define STRVERSION `"$Version`"" | `
+    Out-File `
+      -FilePath NativeCodeModule/version.h
+
 platform: Both
 build:
   project: StripHeaders.sln
   verbosity: normal
 after_build:
-  - ps: >-
-      cd chocolatey-package;
-      ./stripheaders.ps1;
+  - ps: |
+      cd chocolatey-package
+      ./stripheaders.ps1
       choco pack output/stripheaders.nuspec
 artifacts:
 - path: Installer\bin\**\Release\*.msi
