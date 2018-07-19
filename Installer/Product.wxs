@@ -5,7 +5,7 @@
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
     <Upgrade Id="FDFC59AA-E51F-4394-B9AA-5DA92C84A2ED">
       <UpgradeVersion
-         Minimum="1.0.0.0" Maximum="99.0.0.0"
+         Minimum="1.0.0.0" Maximum="$(env.ProductVersion)"
          Property="PREVIOUSVERSIONSINSTALLED"
          IncludeMinimum="yes" IncludeMaximum="no" />
     </Upgrade>
