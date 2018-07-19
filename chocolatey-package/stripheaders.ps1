@@ -6,7 +6,7 @@ $Params = @{
   Algorithm = 'SHA256';
   LocalFile = "..\Installer\bin\x64\Release\${FileName}";
   Hash = '';
-  ProductCode = '{25B47569-4A4A-4326-B5B0-7BD4958A58C3}';
+  ProductCode = '';
 }
 
 
@@ -27,6 +27,9 @@ $Params['Hash'] = Get-FileHash `
   "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)" | Out-File -FilePath 'CHECKSUM.txt' 
 
 Copy-Item -Path $Params['LocalFile'] -Destination "$PSScriptRoot\output\binaries\${FileName}"
+
+$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode)
+  Write-Output "Found ProductCode: $($Params['ProductCode'])"
 
 $(Get-Content -Path "$PSScriptRoot\templates\$Package.nuspec") `
   -replace '##VERSION##', $Version | `
