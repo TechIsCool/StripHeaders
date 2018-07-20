@@ -19,6 +19,8 @@ New-Item `
 -ErrorAction SilentlyContinue | Out-Null
 
 Copy-Item -Path "..\Installer\bin\x64\Release\${FileName}"  -Destination $Params['LocalFile']
+Copy-Item -Path "..\LICENSE"  -Destination "$PSScriptRoot\output\LICENSE"
+
 
 $Params['Hash'] = Get-FileHash `
     -Path $Params['LocalFile'] `
@@ -48,6 +50,13 @@ $(Get-Content -Path "$PSScriptRoot\templates\chocolateyUninstall.ps1") `
   -replace '##PRODUCTCODE##', $Params['ProductCode'] | `
   Out-File "$PSScriptRoot\output\tools\chocolateyUninstall.ps1"
 Write-Output 'Created output\tools\chocolateyUninstall.ps1'
+
+$(Get-Content -Path "$PSScriptRoot\templates\VERIFICATION.txt") `
+  -replace '##FILE##', $FileName `
+  -replace '##SHA256##', $Params['Hash'].Hash | `
+  Out-File "$PSScriptRoot\output\VERIFICATION.txt"
+Write-Output 'Created output\VERIFICATION.txt'
+
 
 Set-Item -Path ENV:NUPKG_VERSION -Value "$Version"
 Set-Item -Path ENV:NUPKG -Value "$Package.$Version.nupkg"
