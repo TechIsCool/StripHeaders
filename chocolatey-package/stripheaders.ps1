@@ -26,7 +26,7 @@ $Params['Hash'] = Get-FileHash `
 
 Copy-Item -Path $Params['LocalFile'] -Destination "$PSScriptRoot\output\binaries\${FileName}"
 
-$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path "$PSScriptRoot\output\binaries\${FileName}" -Property ProductCode).trim()
+$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path "$PSScriptRoot\output\binaries\${FileName}" -Property ProductCode).replace(' ','')
   Write-Output "Found ProductCode: $($Params['ProductCode'])"
 
 $(Get-Content -Path "$PSScriptRoot\templates\$Package.nuspec") `
