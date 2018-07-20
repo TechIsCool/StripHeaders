@@ -26,7 +26,7 @@ $Params['Hash'] = Get-FileHash `
 Write-Output "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)"
 "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)" | Out-File -FilePath 'CHECKSUM.txt'
 
-$FileProductCode = $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode)
+$FileProductCode = $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode | Out-String)
 if($FileProductCode){
   $Params['ProductCode'] = $FileProductCode.replace(' ','')
   Write-Output "Set ProductCode from File"
