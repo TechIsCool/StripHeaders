@@ -26,8 +26,8 @@ $Params['Hash'] = Get-FileHash `
   Write-Output "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)"
   "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)" | Out-File -FilePath 'CHECKSUM.txt'
 
-$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode).replace(' ','')
-  Write-Output "Found ProductCode: $($Params['ProductCode'])"
+$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode)
+  Write-Output "Found ProductCode: $($Params['ProductCode'].replace(' ',''))"
 
 $(Get-Content -Path "$PSScriptRoot\templates\$Package.nuspec") `
   -replace '##VERSION##', $Version | `
