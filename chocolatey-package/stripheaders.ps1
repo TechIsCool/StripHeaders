@@ -4,7 +4,7 @@ $FileName = "iis_stripheaders_module_${Version}.msi"
 
 $Params = @{
   Algorithm = 'SHA256';
-  LocalFile = "..\Installer\bin\x64\Release\${FileName}";
+  LocalFile = "$PSScriptRoot\output\binaries\${FileName}";
   Hash = '';
   ProductCode = '';
 }
@@ -18,15 +18,15 @@ New-Item `
 -Path "$PSScriptRoot\output\binaries","$PSScriptRoot\output\tools\" `
 -ErrorAction SilentlyContinue | Out-Null
 
+Copy-Item -Path "..\Installer\bin\x64\Release\${FileName}"  -Destination $Params['LocalFile']
+
 $Params['Hash'] = Get-FileHash `
     -Path $Params['LocalFile'] `
     -Algorithm $Params['Algorithm']
   Write-Output "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)"
   "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)" | Out-File -FilePath 'CHECKSUM.txt'
 
-Copy-Item -Path $Params['LocalFile'] -Destination "$PSScriptRoot\output\binaries\${FileName}"
-
-$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path "$PSScriptRoot\output\binaries\${FileName}" -Property ProductCode).replace(' ','')
+$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode).replace(' ','')
   Write-Output "Found ProductCode: $($Params['ProductCode'])"
 
 $(Get-Content -Path "$PSScriptRoot\templates\$Package.nuspec") `
