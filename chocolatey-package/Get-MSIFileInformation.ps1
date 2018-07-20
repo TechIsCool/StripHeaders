@@ -22,7 +22,7 @@ Process {
 
         # Commit database and close view
         $MSIDatabase.GetType().InvokeMember("Commit", "InvokeMethod", $null, $MSIDatabase, $null)
-        $View.GetType().InvokeMember("Close", "InvokeMethod", $null, $View, $null)           
+        $View.GetType().InvokeMember("Close", "InvokeMethod", $null, $View, $null)
         $MSIDatabase = $null
         $View = $null
 

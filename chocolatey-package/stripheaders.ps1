@@ -6,7 +6,7 @@ $Params = @{
   Algorithm = 'SHA256';
   LocalFile = "$PSScriptRoot\output\binaries\${FileName}";
   Hash = '';
-  ProductCode = '';
+  ProductCode = '{25B47569-4A4A-4326-B5B0-7BD4958A58C3}';
 }
 
 Write-Output `
@@ -23,11 +23,15 @@ Copy-Item -Path "..\Installer\bin\x64\Release\${FileName}"  -Destination $Params
 $Params['Hash'] = Get-FileHash `
     -Path $Params['LocalFile'] `
     -Algorithm $Params['Algorithm']
-  Write-Output "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)"
-  "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)" | Out-File -FilePath 'CHECKSUM.txt'
+Write-Output "${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)"
+"${FileName} $($Params['Algorithm']): $($Params['Hash'].Hash)" | Out-File -FilePath 'CHECKSUM.txt'
 
-$Params['ProductCode'] = $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode)
-  Write-Output "Found ProductCode: $($Params['ProductCode'].replace(' ',''))"
+$FileProductCode = $(.\Get-MSIFileInformation.ps1 -Path $Params['LocalFile'] -Property ProductCode)
+if($FileProductCode){
+  $Params['ProductCode'] = $FileProductCode.replace(' ','')
+  Write-Output "Set ProductCode from File"
+}
+Write-Output "ProductCode: $($Params['ProductCode'])"
 
 $(Get-Content -Path "$PSScriptRoot\templates\$Package.nuspec") `
   -replace '##VERSION##', $Version | `
