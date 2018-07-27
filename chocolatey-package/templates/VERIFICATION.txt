@@ -14,4 +14,4 @@ and can be verified like this:
   checksum type: 
   checksum64: ##SHA256##
 
-File 'LICENSE.txt' is obtained from <https://github.com/TechIsCool/StripHeaders>
+File 'LICENSE' is obtained from <https://github.com/TechIsCool/StripHeaders>

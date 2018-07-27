@@ -1,5 +1,4 @@
 ﻿$package = 'stripheaders'
-
 $launch_path = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
 $choco_params = @{

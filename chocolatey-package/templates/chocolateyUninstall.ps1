@@ -1,4 +1,4 @@
-﻿$package = 'newrelic-dotnet' # arbitrary name for the package, used in messages
+﻿$package = 'stripheaders'
 $ProductCode_x86 = '##PRODUCTCODE##'
 $ProductCode_x64 = '##PRODUCTCODE##'
 

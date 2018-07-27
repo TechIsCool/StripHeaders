@@ -51,6 +51,11 @@ $(Get-Content -Path "$PSScriptRoot\templates\chocolateyUninstall.ps1") `
   Out-File "$PSScriptRoot\output\tools\chocolateyUninstall.ps1"
 Write-Output 'Created output\tools\chocolateyUninstall.ps1'
 
+Copy-Item `
+ -Path "$PSScriptRoot\output\tools\chocolateyUninstall.ps1" `
+ -Destination "$PSScriptRoot\output\tools\chocolateyBeforeModify.ps1"
+ Write-Output 'Created output\tools\chocolateyBeforeModify.ps1'
+
 $(Get-Content -Path "$PSScriptRoot\templates\VERIFICATION.txt") `
   -replace '##FILE##', $FileName `
   -replace '##SHA256##', $Params['Hash'].Hash | `
